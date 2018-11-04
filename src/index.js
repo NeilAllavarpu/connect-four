@@ -4,11 +4,16 @@ import ReactDOM from "react-dom";
 
 class Cell extends Component {
     render() {
-        const color = this.props.status;
+        console.log(this.props.status);
+        let color = this.props.status;
+        if (typeof this.props.status === "undefined") {
+            color = "empty";
+        }
         return (
             <button
-                className={`cell ${color}`}
+                className="cell"
                 onClick={this.props.onClick}>
+                <div className={`cell ${color}`}></div>
             </button>
         );
     }
@@ -44,25 +49,16 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            "color": "red",
+            "color": "Yellow",
             "squares": Array(7).fill([]),
-            "status": null,
+            "winner": null,
         };
     }
 
     handleClick(j) {
         let squares = this.state.squares;
-        if (squares[j].length === 6) {
-            this.setState({
-                "status": "INVALID PLACE",
-            });
-        } else {
+        if (squares[j].length < 6 && this.state.winner === null) {
             squares[j] = squares[j].concat(this.state.color);
-
-            this.setState({
-                "squares": squares,
-                "color": this.state.color === "red" ? "blue" : "red",
-            });
 
             const len = squares[j].length - 1;
 
@@ -70,8 +66,12 @@ class App extends Component {
                 squares[j][len] === squares[j][len - 2] &&
                 squares[j][len] === squares[j][len - 3]) {
                 this.setState({
-                    "status": `WINNER: ${squares[j][len]}`,
+                    "winner": this.state.color,
                 });
+                squares[j][len] = squares[j][len] + " win";
+                squares[j][len] = squares[j][len - 1] + " win";
+                squares[j][len] = squares[j][len - 2] + " win";
+                squares[j][len] = squares[j][len - 3] + " win";
                 return;
             }
 
@@ -88,8 +88,12 @@ class App extends Component {
                     squares[j + i][len] === squares[j + i - 2][len] &&
                     squares[j + i][len] === squares[j + i - 3][len]) {
                     this.setState({
-                        "status": `WINNER: ${squares[j][len]}`,
+                        "winner": this.state.color,
                     });
+                    squares[j + i][len] = squares[j][len] + " win";
+                    squares[j + i - 1][len] = squares[j][len] + " win";
+                    squares[j + i - 2][len] = squares[j][len] + " win";
+                    squares[j + i - 3][len] = squares[j][len] + " win";
                     return;
                 }
             }
@@ -107,8 +111,12 @@ class App extends Component {
                     squares[j + i][len + i] === squares[j + i - 2][len + i - 2] &&
                     squares[j + i][len + i] === squares[j + i - 3][len + i - 3]) {
                     this.setState({
-                        "status": `WINNER: ${squares[j][len]}`,
+                        "winner": this.state.color,
                     });
+                    squares[j + i][len + i] = squares[j - i][len + i] + " win";
+                    squares[j + i - 1][len + i - 1] = squares[j + i - 1][len + i - 1] + " win";
+                    squares[j + i - 2][len + i - 2] = squares[j + i - 2][len + i - 2] + " win";
+                    squares[j + i - 3][len + i - 3] = squares[j + i - 3][len + i - 3] + " win";
                     return;
                 }
             }
@@ -126,22 +134,41 @@ class App extends Component {
                     squares[j - i][len + i] === squares[j - i + 2][len + i - 2] &&
                     squares[j - i][len + i] === squares[j - i + 3][len + i - 3]) {
                     this.setState({
-                        "status": `WINNER: ${squares[j][len]}`,
+                        "winner": this.state.color,
                     });
+                    squares[j - i][len + i] = squares[j - i][len + i] + " win";
+                    squares[j - i + 1][len + i - 1] = squares[j - i + 1][len + i - 1] + " win";
+                    squares[j - i + 2][len + i - 2] = squares[j - i + 2][len + i - 2] + " win";
+                    squares[j - i + 3][len + i - 3] = squares[j - i + 3][len + i - 3] + " win";
                     return;
                 }
             }
 
+            this.setState({
+                "squares": squares,
+                "color": this.state.color === "Yellow" ? "Red" : "Yellow",
+            });
         }
     }
 
     render() {
-        let status = this.state.status;
+        let status = this.state.winner;
+        if (status !== null) {
+            status = (
+                <div>Winner: <span className={`${this.state.color}-text`}>{this.state.color}</span></div>
+            );
+        } else {
+            status = (
+                <div>Next player: <span className={`${this.state.color}-text`}>{this.state.color}</span></div>
+            );
+        }
         return (
-            <div className="App">
-                <Board squares={this.state.squares}
-                    onClick={(j) => this.handleClick(j)} />
-                <div>{status}</div>
+            <div className="app">
+                <div className="game">
+                    <Board squares={this.state.squares}
+                        onClick={(j) => this.handleClick(j)} />
+                </div>
+                <div className="info">{status}</div>
             </div>
         );
     }
