@@ -1,20 +1,26 @@
+/* general formatting for all elements */
 body {
     background-color: tan;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif
 }
 
+/* formatting for the board */
 .board {
     background: darkcyan;
     padding: 10px;
     border: 10px solid black;
 }
 
+/* formatting for the end of the rows
+   so that we can get nice pretty rows for the board */
 .row:after {
     clear: both;
     content: "";
     display: table;
 }
 
+/* formatting for individual cells in general
+   note that the color of the circle in the center is further overridden based on what classes it has */
 .cell {
     background: darkcyan;
     border: 1px solid darkcyan;
@@ -25,6 +31,7 @@ body {
     width: 100px;
 }
 
+/* formatting for cells that have been claimed by Yellow */
 .Yellow {
     background-color: yellow;
     height: 92px;
@@ -32,6 +39,7 @@ body {
     border-radius: 46px;
 }
 
+/* formatting for cells that have been claimed by Red */
 .Red {
     background-color: red;
     height: 92px;
@@ -39,6 +47,7 @@ body {
     border-radius: 46px;
 }
 
+/* formatting for unclaimed cells */
 .undefined {
     background-color: tan;
     margin-left: 1px;
@@ -48,25 +57,30 @@ body {
     border-radius: 46px;
 }
 
+/* formatting for the app class, so board doesn't expand across the entire screen */
 .app {
     display: flex;
     flex-direction: row;
     font-size: 30px;
 }
 
+/* formatting for the info on the right of board */
 .info {
     margin-left: 20px;
 }
 
+/* formatting for Yellow's name */
 .Yellow-text {
     color: yellow;
 }
 
+/* formatting for Red's name */
 .Red-text {
     color: red;
 }
 
-.thinYellow {
+/* formatting for the darker, hover cells for possibilites for Yellow */
+.possibleYellow {
     margin-left: 1px;
     margin-top: 0px;
     height: 92px;
@@ -75,7 +89,8 @@ body {
     background-color: rgb(150, 150, 0);
 }
 
-.thinRed {
+/* formatting for the darker, hover cells for possibilities for Red */
+.possibleRed {
     margin-left: 1px;
     margin-top: 0px;
     height: 92px;
@@ -84,19 +99,58 @@ body {
     background-color: rgb(150, 0, 0);
 }
 
-.bold {
-    font-weight: bold;
-}
-
+/* formatting for cells that are part of a four-in-a-row */
 .win {
     animation: blink 1s ease-in-out 0s infinite alternate;
 }
 
+.win-desc {
+    animation: rainbow 6s ease-in-out 0s infinite normal;
+    font-weight: bold;
+    font-size: 50px;
+}
+
+.win-team {
+    font-weight: bold;
+    font-size: 50px;
+}
+
+/* animation to blink the winning cells */
 @keyframes blink {
     0% {
         opacity: 1;
     }
     100% {
         opacity: 0;
+    }
+}
+
+@keyframes rainbow {
+    0% {
+        color: #f00;
+    }
+
+    17% {
+        color: #ff0;
+    }
+
+    33% {
+        color: #0f0;
+    }
+
+    50% {
+        color: #0ff;
+    }
+
+    67% {
+        color: #00f;
+    }
+
+    83% {
+        color: #f0f;
+    }
+
+    100% {
+        color: #f00;
     }
 }

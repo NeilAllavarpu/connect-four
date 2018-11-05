@@ -107,7 +107,7 @@ class App extends Component {
         let board = [...this.state.board];
 
         // if we have the cell in a hover state
-        if (board[x][board[x].length - 1] === `thin${this.state.color}`) {
+        if (board[x][board[x].length - 1] === `possible${this.state.color}`) {
             // remove the hover state cell
             board[x].splice(board[x].length - 1, board[x].length);
         }
@@ -259,8 +259,8 @@ class App extends Component {
         if (this.state.winner === null) {
             // get the board, but make sure we don't modify it
             let board = [...this.state.board];
-            // add a dimmer version of the current player's color to indicate a possible move
-            board[x] = board[x].concat(`thin${this.state.color}`);
+            // add a darker version of the current player's color to indicate a possible move
+            board[x] = board[x].concat(`possible${this.state.color}`);
             this.setState({
                 // update the board with the dimmer circle
                 "board": board,
@@ -275,9 +275,9 @@ class App extends Component {
     handleExit(x) {
         // get the board, but don't modify it
         let board = [...this.state.board];
-        // if the column that the mouse left has a hover, dimmer circle at top of the column
-        if (board[x][board[x].length - 1] === `thin${this.state.color}`) {
-            // remove that hover, dimmer circle from the end of the column
+        // if the column that the mouse left has a hover, darker circle at top of the column
+        if (board[x][board[x].length - 1] === `possible${this.state.color}`) {
+            // remove that hover, darker circle from the end of the column
             board[x].splice(board[x].length - 1, board[x].length);
             this.setState({
                 // update the board with the removed item
@@ -288,6 +288,7 @@ class App extends Component {
 
     /**
      * Main rendring of the whole screen
+     * @returns {JSX} A JSX element for the whole animation
      */
     render() {
         // status that will be shown to the right of the board,
@@ -296,7 +297,7 @@ class App extends Component {
         if (this.state.winner !== null) {
             // status message is "Winner: (winnerColor)", where winnerColor is colored in its color
             status = (
-                <div>Winner: <span className={`${this.state.color}-text`}>{this.state.color}</span></div>
+                <div><span className="win-desc">Winner: </span><span className={`${this.state.color}-text win-team`}>{this.state.color}</span></div>
             );
         } else {
             // no winner yet
@@ -317,7 +318,7 @@ class App extends Component {
                 // add a cell
                 // set its classes based on the current game's status
                 // set its click handler to facilitate the adding of chips and win checking, and pass it by column
-                // set its mouseOver and mouseOut handlers by the columns to handle hovering and the dimmer circle showing possibility
+                // set its mouseOver and mouseOut handlers by the columns to handle hovering and the darker circle showing possibility
                 row.push(<Cell
                     key={i * 7 + j}
                     classes={this.state.board[j][5 - i]}
