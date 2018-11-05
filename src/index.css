@@ -39,7 +39,7 @@ body {
     border-radius: 46px;
 }
 
-.empty {
+.undefined {
     background-color: tan;
     margin-left: 1px;
     margin-top: 0px;
@@ -64,6 +64,28 @@ body {
 
 .Red-text {
     color: red;
+}
+
+.thinYellow {
+    margin-left: 1px;
+    margin-top: 0px;
+    height: 92px;
+    width: 92px;
+    border-radius: 46px;
+    background-color: rgb(150, 150, 0);
+}
+
+.thinRed {
+    margin-left: 1px;
+    margin-top: 0px;
+    height: 92px;
+    width: 92px;
+    border-radius: 46px;
+    background-color: rgb(150, 0, 0);
+}
+
+.bold {
+    font-weight: bold;
 }
 
 .win {
