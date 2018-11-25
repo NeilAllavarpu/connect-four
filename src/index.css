@@ -6,7 +6,7 @@ body {
 
 /* formatting for the board */
 .board {
-    background: darkcyan;
+    background: yellow;
     padding: 10px;
     border: 10px solid black;
 }
@@ -22,8 +22,8 @@ body {
 /* formatting for individual cells in general
    note that the color of the circle in the center is further overridden based on what classes it has */
 .cell {
-    background: darkcyan;
-    border: 1px solid darkcyan;
+    background: yellow;
+    border: 1px solid yellow;
     float: left;
     height: 100px;
     margin: 0px;
@@ -31,9 +31,9 @@ body {
     width: 100px;
 }
 
-/* formatting for cells that have been claimed by Yellow */
-.Yellow {
-    background-color: yellow;
+/* formatting for cells that have been claimed by Black */
+.Black {
+    background-color: black;
     height: 92px;
     width: 92px;
     border-radius: 46px;
@@ -69,9 +69,9 @@ body {
     margin-left: 20px;
 }
 
-/* formatting for Yellow's name */
-.Yellow-text {
-    color: yellow;
+/* formatting for Black's name */
+.Black-text {
+    color: black;
 }
 
 /* formatting for Red's name */
@@ -79,14 +79,14 @@ body {
     color: red;
 }
 
-/* formatting for the darker, hover cells for possibilites for Yellow */
-.possibleYellow {
+/* formatting for the darker, hover cells for possibilites for Black */
+.possibleBlack {
     margin-left: 1px;
     margin-top: 0px;
     height: 92px;
     width: 92px;
     border-radius: 46px;
-    background-color: rgb(150, 150, 0);
+    background-color: rgb(127, 127, 127);
 }
 
 /* formatting for the darker, hover cells for possibilities for Red */
@@ -96,12 +96,12 @@ body {
     height: 92px;
     width: 92px;
     border-radius: 46px;
-    background-color: rgb(150, 0, 0);
+    background-color: rgb(127, 0, 0);
 }
 
 /* formatting for cells that are part of a four-in-a-row */
 .win {
-    animation: blink 1s ease-in-out 0s infinite alternate;
+    animation: blink 0.5s ease-in-out 0s infinite alternate;
 }
 
 .win-desc {

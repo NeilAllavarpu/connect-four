@@ -89,8 +89,8 @@ class App extends Component {
         super(props);
         // set the default conditions of the game
         this.state = {
-            // yellow gets to go first
-            "color": "Yellow",
+            // Black gets to go first
+            "color": "Black",
             // board is initially empty 2-D array
             "board": Array(7).fill([]),
             // no winner yet
@@ -243,8 +243,8 @@ class App extends Component {
                 this.setState({
                     // update the board
                     "board": results["board"],
-                    // switch between red and yellow
-                    "color": this.state.color === "Yellow" ? "Red" : "Yellow",
+                    // switch between red and black
+                    "color": this.state.color === "Black" ? "Red" : "Black",
                 });
             }
         }
